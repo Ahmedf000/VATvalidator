@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
 
 
     def build_ui(self):
-        central = centralWidget(self)
+        central = QWidget()
         self.setCentralWidget(central)
 
         vbox = QVBoxLayout()
@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
 
         holder_name = QLabel("Bank holder name:  ")
         vbox.addWidget(holder_name)
-        vbox.addwidget(self.holder_name_input)
+        vbox.addWidget(self.holder_name_input)
         self.holder_name_input.setPlaceholderText("Paste your Holder Name here..")
 
         self.vat_input.setObjectName("vat_input")
