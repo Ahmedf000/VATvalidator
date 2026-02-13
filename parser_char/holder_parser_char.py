@@ -11,9 +11,10 @@ class HolderNameCleaner:
         self.pattern_E = re.compile(r"[ÈÉÊËĒĔĖĘĚƎƐẸẺẼẾỀỂỄỆeèéêëēĕėęěəɛẹẻẽếềểễệ]")
         self.pattern_F = re.compile(r"[ḞƑfḟƒ]")
         self.pattern_G = re.compile(r"[ǴĞĠĢƓɠgǵğġģɠɡ]")
+        self.pattern_J = re.compile(r"[ĴJjĵɉʝ]")
         self.pattern_H = re.compile(r"[ḢḤḦḨĤȞƕhḣḥḧḩĥȟɦħ]")
         self.pattern_I = re.compile(r"[ÌÍÎÏĨĪĬĮİǏƗỊỈȈȊiìíîïĩīĭįıǐịỉȉȋɨ]")
-        self.pattern_k = re.compile(r"[ḰḲḴƘǨkḱḳḵƙǩ]")
+        self.pattern_K = re.compile(r"[ḰḲḴƘǨkḱḳḵƙǩ]")
         self.pattern_L = re.compile(r"[ĹĻĽĿŁƚlĺļľŀłɫɬ]")
         self.pattern_M = re.compile( r"[ḾṀṂmḿṁṃɱ]")
         self.pattern_N = re.compile(r"[ŃŅŇÑṄṆṈṊƝƞnńņňñṅṇṉṋɲ]")
@@ -44,13 +45,11 @@ class HolderNameCleaner:
         }
 
 
-
-
-        def clean_all(self,text):
-            for replacement, pattern in self.patterns.items():
-                text = pattern.sub(replacement, text)
-            text = self.special_char.sub('', text)
-            return text
+    def clean_all(self, text):
+        for replacement, pattern in self.patterns.items():
+            text = pattern.sub(replacement, text)
+        text = self.special_char.sub('', text)
+        return text
 
 
 

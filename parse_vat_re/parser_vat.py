@@ -3,7 +3,7 @@ import re
 class VATCleaner:
     def __init__(self):
         self.remove_extra_whitespace = re.compile(r'\s+')
-        self.remove_special_chars = re.compile(r"[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?~`]'")
+        self.remove_special_chars = re.compile(r"[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?~`]")
         self.leading_whitespace = re.compile(r'^\s+')
         self.dashes = re.compile(r'-\s*')
         self.commas = re.compile(r',')

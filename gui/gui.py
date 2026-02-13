@@ -304,14 +304,15 @@ class MainWindow(QMainWindow):
 
 
     def click_holder_name(self):
-        text = self.holder_name_input.text().strip(digits)
+        text = self.holder_name_input.text().strip()
 
-        if text.isdigit():
-            self.output.setText("Clean up the digits within the input...")
+        if not text:
+            self.output.setText("Please enter a holder name...")
+            return
 
         try:
             holder_name_parser = HolderNameCleaner()
-            clean = holder_name_parser.clean_all()
+            clean = holder_name_parser.clean_all(text)
             self.output.setText(str(clean))
         except Exception as e:
             self.output.setText(f"Unexpected error: {str(e)}")
@@ -320,45 +321,24 @@ class MainWindow(QMainWindow):
 
 
     def click_vat(self):
-        text = self.input.toPlainText().strip().upper()
-
-
+        text = self.vat_input.text().strip().upper()
         if not text:
-            self.output.setText("Please enter a Valid VAT Code...")
+            self.output.setText("Please enter a VAT Code...")
             return
+        try:
+            parser = VATCleaner()
+            cleaned = text
+            cleaned = parser.extra_whitespace(cleaned)
+            cleaned = parser.special_chars(cleaned)
+            cleaned = parser.leading(cleaned)
+            cleaned = parser.dash(cleaned)
+            cleaned = parser.comma(cleaned)
+            result = validate_address(cleaned)
+            self.output.setText(result)
+        except Exception as e:
+            self.output.setText(f"Something went wrong: {e}")
 
-        if len(text) >= 15:
-            self.output.setText("The VAT length is incorrect...")
 
-            try:
-                parser = VATCleaner()
-
-                cleaners = [
-                    'extra_whitespace',
-                    'special_chars',
-                    'leading',
-                    'dash',
-                    'comma'
-                ]
-
-                results = []
-
-                for c in cleaners:
-                    attr = getattr(parser, c)
-                    if callable(attr):
-                        cleaned = attr(self.vat_input)
-                    else:
-                        try:
-                            cleaned = attr(self.vat_input)
-                        except TypeError:
-                            cleaned = attr
-
-                    self.output.setText(cleaned)
-
-                return results
-
-            except Exception as e:
-                self.output.setText(f"Something went wrong. {e}")
 
 
 
