@@ -1,3 +1,6 @@
+import sys
+from string import digits
+
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QVBoxLayout, QHBoxLayout,
     QPushButton, QWidget, QTextEdit, QLineEdit, QLabel
@@ -7,6 +10,7 @@ from PyQt5.QtCore import Qt
 
 from requests_vat.requests_vat import validate_address
 from parse_vat_re.parser_vat import VATCleaner
+from parser_char.holder_parser_char import HolderNameCleaner
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -300,7 +304,19 @@ class MainWindow(QMainWindow):
 
 
     def click_holder_name(self):
-        pass
+        text = self.holder_name_input.text().strip(digits)
+
+        if text.isdigit():
+            self.output.setText("Clean up the digits within the input...")
+
+        try:
+            holder_name_parser = HolderNameCleaner()
+            clean = holder_name_parser.clean_all()
+            self.output.setText(str(clean))
+        except Exception as e:
+            self.output.setText(f"Unexpected error: {str(e)}")
+
+
 
 
     def click_vat(self):

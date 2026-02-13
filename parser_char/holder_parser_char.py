@@ -31,88 +31,26 @@ class HolderNameCleaner:
         self.pattern_Z = re.compile(r"[ŹŻŽƵẐẒẔzźżžƶẑẓẕ]")
         self.special_char = re.compile(r"[!\"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~]")
 
-
-        def a(self, text):
-            return self.pattern_A.sub('a',text)
-
-        def b(self, text):
-            return self.pattern_A.sub('b', text)
-
-        def c(self, text):
-            return self.pattern_A.sub('c', text)
-
-        def d(self, text):
-            return self.pattern_A.sub('d', text)
-
-        def e(self, text):
-            return self.pattern_A.sub('e', text)
-
-        def f(self, text):
-            return self.pattern_A.sub('f', text)
-
-        def g(self, text):
-            return self.pattern_A.sub('g', text)
-
-        def h(self, text):
-            return self.pattern_A.sub('h', text)
-
-        def i(self, text):
-            return self.pattern_A.sub('i', text)
-
-        def j(self, text):
-            return self.pattern_A.sub('j', text)
-
-        def k(self, text):
-            return self.pattern_A.sub('k', text)
-
-        def l(self, text):
-            return self.pattern_A.sub('l', text)
-
-        def m(self, text):
-            return self.pattern_A.sub('m', text)
-
-        def n(self, text):
-            return self.pattern_A.sub('n', text)
-
-        def o(self, text):
-            return self.pattern_A.sub('o', text)
-
-        def p(self, text):
-            return self.pattern_A.sub('p', text)
-
-        def q(self, text):
-            return self.pattern_A.sub('q', text)
-
-        def r(self, text):
-            return self.pattern_A.sub('r', text)
-
-        def s(self, text):
-            return self.pattern_A.sub('s', text)
-
-        def t(self, text):
-            return self.pattern_A.sub('t', text)
-
-        def u(self, text):
-            return self.pattern_A.sub('u',text)
-
-        def v(self, text):
-            return self.pattern_A.sub('v',text)
-
-        def w(self, text):
-            return self.pattern_A.sub('w',text)
-
-        def x(self, text):
-            return self.pattern_A.sub('x',text)
-
-        def y(self, text):
-            return self.pattern_A.sub('y',text)
-
-        def z(self, text):
-            return self.pattern_A.sub('z',text)
+        self.patterns = {
+            'a': self.pattern_A, 'b': self.pattern_B, 'c': self.pattern_C,
+            'd': self.pattern_D, 'e': self.pattern_E, 'f': self.pattern_F,
+            'g': self.pattern_G, 'h': self.pattern_H, 'i': self.pattern_I,
+            'j': self.pattern_J, 'k': self.pattern_K, 'l': self.pattern_L,
+            'm': self.pattern_M, 'n': self.pattern_N, 'o': self.pattern_O,
+            'p': self.pattern_P, 'q': self.pattern_Q, 'r': self.pattern_R,
+            's': self.pattern_S, 't': self.pattern_T, 'u': self.pattern_U,
+            'v': self.pattern_V, 'w': self.pattern_W, 'x': self.pattern_X,
+            'y': self.pattern_Y, 'z': self.pattern_Z,
+        }
 
 
-        def special(self, text):
-            return self.special_char.sub('',text)
+
+
+        def clean_all(self,text):
+            for replacement, pattern in self.patterns.items():
+                text = pattern.sub(replacement, text)
+            text = self.special_char.sub('', text)
+            return text
 
 
 
