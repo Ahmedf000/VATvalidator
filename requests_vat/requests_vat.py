@@ -12,7 +12,6 @@ def validate_address(vat):
    }
 
 
-
    r = requests.get(url, params=params)
    data = r.json()
 
